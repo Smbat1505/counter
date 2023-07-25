@@ -1,38 +1,105 @@
-.App {
-  text-align: center;
+:root {
+    --color_1: #f00;
+
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+.App {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row-reverse;
+    box-sizing: border-box;
+    /*gap: 20px;*/
+    background: #282c34;
+    padding: 20px;
+    width: 100vw;
+    height: 100vh;
 }
+
+.MonBtnSection, .SettingSection {
+    /*display: flex;*/
+
+
+    width: 500px;
+    height: 270px;
+    border: 2px solid #a0a0b9;
+    border-radius: 5px;
+
+    padding: 10px;
+}
+
+
+.ButtonSection, .MonitorSection {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /*flex-wrap: wrap;*/
+
+    color: white;
+    font-size: 2rem;
+    font-weight: 600;
+
+
+    height: 100px;
+    width: 80%;
+
+    margin: 20px auto;
+
+    border: 2px solid #a0a0b9;
+    border-radius: 5px;
+}
+
+.InputSection {
+
+}
+
+.Form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+}
+
+input{
+    width: 180px;
+    height: 25px;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.Label {
+    margin-right: 10px;
+}
+
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+    background-color: #282c34;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
 }
 
 .App-link {
-  color: #61dafb;
+    color: #61dafb;
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
 }

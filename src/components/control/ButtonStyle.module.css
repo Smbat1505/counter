@@ -1,0 +1,45 @@
+.inc {
+    background: blue;
+    color: aliceblue;
+    box-shadow: none;
+    border-radius: 5px;
+    width: 60px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+    margin-right: 5px;
+}
+
+.reset {
+    background: rgba(0, 0, 255, 0.54);
+    color: aliceblue;
+    box-shadow: none;
+    border-radius: 5px;
+    width: 70px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.set {
+    background: blue;
+    color: aliceblue;
+    box-shadow: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.disabled {
+    background: rgba(0, 0, 0, 0.24);
+    color: rgba(0, 0, 0, 0.24);
+    border: 1px rgba(0, 0, 0, 0.24);
+    box-shadow: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    font-size: 18px;
+    font-weight: 600;
+}
