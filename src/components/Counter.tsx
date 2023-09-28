@@ -89,7 +89,8 @@ const Counter = () => {
                     errorValue ?
                         <h2 className={'errors-value'}><em>Invalid value, start value must not exceed the maximum, start
                             or maximum cannot be less than 0 </em></h2> :
-                        <h2 className={countMaxValue ? 'red' : undefined}>{count}</h2>
+                        countMaxValue ? <h2 className={countMaxValue ? 'red' : undefined}>You have reached the maximum value</h2> :
+                            <h2>{count}</h2>
                 }
 
                 <hr/>
