@@ -1,25 +1,80 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
-.idea
-
-
-# testing
-/coverage
-
-# production
-/build
-
-# misc
+# Игнорировать временные файлы и директории
+.vscode/
+.idea/
+*.swp
+*.swo
 .DS_Store
+
+# Игнорировать зависимости и виртуальные окружения
+node_modules/
+npm-debug.log
+yarn-error.log
+venv/
+.env
+
+# Игнорировать сгенерированные и временные файлы сборки
+dist/
+build/
+*.log
+*.tmp
+
+# Игнорировать локальные настройки и файлы конфигурации
 .env.local
+.env.*.local
 .env.development.local
 .env.test.local
 .env.production.local
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Игнорировать папки сборки и файлы бинарных данных
+target/
+*.jar
+*.war
+*.ear
+*.class
+
+# Игнорировать файлы настроек проекта
+.idea/
+.project
+.settings/
+.classpath
+
+# Игнорировать файлы логов
+logs/
+*.log
+*.log.*
+log.txt
+
+# Игнорировать файлы и директории для временных файлов и кэша
+.tmp/
+.cache/
+.cached/
+
+# Игнорировать файлы настроек редактора
+.vscode/
+*.sublime-project
+*.sublime-workspace
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Игнорировать файлы настроек системы сборки
+*.log
+*.pid
+*.seed
+*.pid.lock
+*.log.*
+*.log-*
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+lerna-debug.log*
+
+# Игнорировать файлы конфигурации для различных сред
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
