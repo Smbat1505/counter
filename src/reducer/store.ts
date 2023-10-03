@@ -1,12 +1,17 @@
-import {combineReducers, legacy_createStore} from "redux";
-import {reducerForCounter} from "./reducerForCounter";
+import {createStore, applyMiddleware} from 'redux';
+import thunk, {ThunkMiddleware} from 'redux-thunk'; // Изменил импорт thunk и ThunkMiddleware
+import {reducerForCounter, RootACType} from "./reducerForCounter";
 
-export const rootReducer = combineReducers({
-    counter: reducerForCounter
-})
-export const store = legacy_createStore(rootReducer)
+const store = createStore(
+    reducerForCounter,
+    applyMiddleware(thunk as ThunkMiddleware<AppRootStateType, RootACType>)
+);
 
-export type AppRootStateType = ReturnType<typeof rootReducer>
+export default store;
 
-// @ts-ignore
-window.store = store
+export type AppRootStateType = ReturnType<typeof reducerForCounter>; // Определение типа RootState
+
+// Оставьте это, если оно необходимо для вашей отладки
+if (process.env.NODE_ENV === 'development') {
+    (window as any).__store__ = store;
+}

@@ -1,4 +1,4 @@
-import React, { InputHTMLAttributes, ReactNode } from 'react';
+import React, {InputHTMLAttributes, memo, ReactNode} from 'react';
 
 type UniversalInputProps = InputHTMLAttributes<HTMLInputElement> & {
     label?: string;
@@ -6,7 +6,7 @@ type UniversalInputProps = InputHTMLAttributes<HTMLInputElement> & {
     // Добавьте любые дополнительные свойства или опции настраиваемого ввода здесь
 };
 
-export const UniversalInput: React.FC<UniversalInputProps> = ({ label, children, ...props }) => {
+export const UniversalInput: React.FC<UniversalInputProps> = memo(({label, children, ...props}) => {
     return (
         <div>
             {label && <label htmlFor={props.id}>{label}</label>}
@@ -14,4 +14,4 @@ export const UniversalInput: React.FC<UniversalInputProps> = ({ label, children,
             {children}
         </div>
     );
-};
+});

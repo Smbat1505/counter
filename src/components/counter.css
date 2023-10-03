@@ -3,16 +3,19 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: flex-start;
-    /*min-width: 600px;*/
-    width: 100vw;
+    min-width: 600px;
+    max-width: 800px;
     height: auto;
     border: 1px #fff solid;
+    border-radius: 17px;
     padding: 10px;
+    margin: 100px auto;
 }
 
 .counter-screen {
     width: 100%;
     border: 1px solid #fff;
+    border-radius: 7px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -73,6 +76,8 @@ button {
     margin-right: 10px;
     font-size: 0.9rem;
     font-weight: 500;
+    border-radius: 0.3em;
+    border: none;
 }
 
 .settings {
@@ -88,6 +93,12 @@ button {
     -webkit-transition: -webkit-transform .5s ease-in-out;
     transition: transform .5s ease-in-out;
 }
+
+.settings > svg {
+    fill: gray;
+}
+
+
 
 .settings:hover {
 
@@ -109,7 +120,10 @@ input {
     height: 25px;
     font-size: 18px;
     padding-left: 10px;
-    margin-left: 10px;
+    /*margin-left: 10px;*/
+    border: none;
+    border-radius: 0.3em;
+    margin: 0 0 20px 6px;
 }
 
 label {
@@ -165,6 +179,10 @@ label {
 
 .resets img {
     width: 30px;
+}
+
+.resets .material-symbols-outlined {
+    color: red;
 }
 
 .resets:hover {

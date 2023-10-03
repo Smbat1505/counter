@@ -1,7 +1,13 @@
-type InitialStateType = {
-    count: number;
-    maxValue: number;
-    startValue: number;
+
+export type countType = number
+export type startValueType = number
+export type maxValueType = number
+
+
+export type InitialStateType = {
+    count: countType;
+    startValue: startValueType;
+    maxValue: maxValueType;
 }
 // Исходное состояние (initial state)
 const initialState: InitialStateType = {
@@ -12,24 +18,29 @@ const initialState: InitialStateType = {
 
 export const reducerForCounter = (state = initialState, action: RootACType): InitialStateType => {
     switch (action.type) {
-        case "INCREMENT": {
+        case "INCREMENT_COUNTER": {
             if (state.count < state.maxValue) return {...state, count: state.count + 1};
             return state
         }
 
-        case "RESET": {
+        case "RESET_COUNTER": {
             return {...state, count: state.startValue}
         }
 
-        case "MAX_VALUE_CHANGE": {
+        case "SET_MAX_VALUE": {
             const {maxValue} = action.payload
             return {...state, maxValue}
         }
 
-        case "START_VALUE_CHANGE": {
+        case "SET_START_VALUE": {
             const {startValue} = action.payload
             return {...state, startValue}
         }
+        case 'SET_COUNT':
+            const {count} = action.payload
+            return {...state, count};
+        case 'RESET_ALL':
+            return initialState;
 
         default:
             return state
@@ -37,13 +48,19 @@ export const reducerForCounter = (state = initialState, action: RootACType): Ini
 }
 
 
-export type RootACType = IncrementACType | ResetACType | MaxValueChangeACType | StartValueChangeACType;
+export type RootACType =
+    IncrementACType
+    | ResetACType
+    | MaxValueChangeACType
+    | StartValueChangeACType
+    | ResetAllACType
+    | CountACType;
 
 
 type IncrementACType = ReturnType<typeof IncrementAC>
 export const IncrementAC = () => {
     return {
-        type: 'INCREMENT',
+        type: 'INCREMENT_COUNTER',
         payload: {}
     } as const
 }
@@ -51,7 +68,7 @@ export const IncrementAC = () => {
 type ResetACType = ReturnType<typeof ResetAC>
 export const ResetAC = () => {
     return {
-        type: 'RESET',
+        type: 'RESET_COUNTER',
         payload: {}
     } as const
 }
@@ -60,7 +77,7 @@ export const ResetAC = () => {
 type MaxValueChangeACType = ReturnType<typeof MaxValueChangeAC>
 export const MaxValueChangeAC = (maxValue: number) => {
     return {
-        type: 'MAX_VALUE_CHANGE',
+        type: 'SET_MAX_VALUE',
         payload: {
             maxValue
         }
@@ -70,10 +87,24 @@ export const MaxValueChangeAC = (maxValue: number) => {
 type StartValueChangeACType = ReturnType<typeof StartValueChangeAC>
 export const StartValueChangeAC = (startValue: number) => {
     return {
-        type: 'START_VALUE_CHANGE',
+        type: 'SET_START_VALUE',
         payload: {
             startValue
         }
     } as const
 }
 
+type CountACType = ReturnType<typeof SetCountAC>
+export const SetCountAC = (count: number) => {
+    return {
+        type: 'SET_COUNT',
+        payload: {
+            count
+        }
+    } as const
+}
+
+type ResetAllACType = ReturnType<typeof ResetAllAC>
+export const ResetAllAC = () => {
+    return {type: 'RESET_ALL'} as const
+};

@@ -1,32 +1,57 @@
 // TODO Компонент предоставляет счетчик с возможностью настройки максимального и начального значений. Пользователь может увеличивать значение счетчика на 1, сбрасывать его до начального значения, а также устанавливать новые значения с помощью настроек. В случае некорректных значений (например, когда начальное значение превышает максимальное или меньше нуля) отображается сообщение об ошибке. Также есть кнопка "Reset", которая полностью сбрасывает счетчик и настройки.
 
 
-import React, {useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import './counter.css';
 import reset from './../img/reset.svg';
 import {Button} from "./button/Button";
-import {UniversalInput} from "./input/UniversalInput"; // Импорт изображения для кнопки сброса
+import {UniversalInput} from "./input/UniversalInput";
+import {useDispatch, useSelector} from "react-redux";
+import {
+    countType,
+    IncrementAC,
+    InitialStateType,
+    MaxValueChangeAC, maxValueType,
+    ResetAC, ResetAllAC, SetCountAC,
+    StartValueChangeAC, startValueType
+} from "../reducer/reducerForCounter";
+import {AppRootStateType} from "../reducer/store";
+
 
 const Counter = () => {
 
-    
+    const count = useSelector<AppRootStateType, countType>(state => state.count);
+    const startValue = useSelector<AppRootStateType, startValueType>(state => state.startValue);
+    const maxValue = useSelector<AppRootStateType, maxValueType>(state => state.maxValue);
+    const dispatch = useDispatch();
+    // const {maxValue, startValue, count} = useSelector<AppRootStateType, InitialStateType>(
+    //     (state) => state
+    // );
 
-    // Проверяем наличие сохраненных данных в localStorage
-    const storedCountValue = localStorage.getItem('countValue')
-    const storedMaxValue = localStorage.getItem('maxValue');
-    const storedStartValue = localStorage.getItem('startValue');
-
-
-    // Используем сохраненные данные из localStorage или устанавливаем значения по умолчанию
-
-    const [maxValue, setMaxValue] = useState(storedMaxValue ? parseInt(storedMaxValue, 10) : 5); // Состояние для хранения максимального значения счетчика
-
-    const [startValue, setStartValue] = useState(storedStartValue ? parseInt(storedStartValue, 10) : 0); // Состояние для хранения начального значения счетчика
 
     const [showSettings, setShowSettings] = useState(false); // Состояние для переключения отображения настроек
 
-    const [count, setCount] = useState(storedCountValue ? parseInt(storedCountValue, 10) : 0); // Состояние для хранения текущего значения счетчика
+    const [inputEmpty, setInputEmpty] = useState(false);
 
+
+    // Проверяем наличие сохраненных данных в localStorage
+    useEffect(() => {
+        const storedCountValue = localStorage.getItem('countValue');
+        const storedMaxValue = localStorage.getItem('maxValue');
+        const storedStartValue = localStorage.getItem('startValue');
+
+        if (storedMaxValue) {
+            dispatch(MaxValueChangeAC(parseInt(storedMaxValue, 10)));
+        }
+
+        if (storedStartValue) {
+            dispatch(StartValueChangeAC(parseInt(storedStartValue, 10)));
+        }
+
+        if (storedCountValue) {
+            dispatch(SetCountAC(parseInt(storedCountValue, 10)));
+        }
+    }, [dispatch]);
 
     // Сохраняем значения в localStorage при их изменении
     useEffect(() => {
@@ -42,48 +67,60 @@ const Counter = () => {
     }, [startValue]);
 
 
-    const handleIncrement = () => {
+    const handleIncrement = useCallback(() => {
         if (count < maxValue) {
-            setCount(prevCount => prevCount + 1); // Функция для увеличения значения счетчика на 1
+            dispatch(IncrementAC());
         }
-    };
+    }, [dispatch]);
 
-    const handleReset = () => {
-        setCount(startValue); // Функция для сброса счетчика до начального значения
-    };
+    const handleReset = useCallback(() => {
+        dispatch(ResetAC()); // Функция для сброса счетчика до начального значения
+    }, [dispatch]);
 
-    const handleMaxValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleMaxValueChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.currentTarget.value, 10);
-        setMaxValue(value); // Функция для обработки изменения максимального значения в поле ввода
-    };
+        dispatch(MaxValueChangeAC(value)); // Функция для обработки изменения максимального значения в поле ввода
 
-    const handleStartValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+        // Проверяем, является ли поле пустым и устанавливаем состояние
+        setInputEmpty(event.currentTarget.value === '');
+    }, [dispatch]);
+
+    const handleStartValueChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         const value = parseInt(event.currentTarget.value, 10);
-        setStartValue(value); // Функция для обработки изменения начального значения в поле ввода
-    };
+        dispatch(StartValueChangeAC(value)); // Функция для обработки изменения начального значения в поле ввода
 
-    const handleSet = () => {
-        setCount(startValue); // Функция для установки значения счетчика в начальное значение
-        setShowSettings(false);
-    };
+        // Проверяем, является ли поле пустым и устанавливаем состояние
+        setInputEmpty(event.currentTarget.value === '');
+    }, [dispatch]);
 
-    const handleHiddenSettings = () => {
+    const handleSet = useCallback(() => {
+        if (startValue >= maxValue || startValue < 0) {
+            // Обработка ошибки
+        } else {
+            dispatch(ResetAC()); // Сброс счетчика до начального значения
+        }
+        setShowSettings(false)
+    }, [dispatch, setShowSettings]);
+
+    const handleHiddenSettings = useCallback(() => {
         setShowSettings(prevShowSettings => !prevShowSettings); // Функция для переключения отображения настроек
-    };
+    }, [setShowSettings]);
 
-    const handleResetOll = () => {
+    const handleResetOll = useCallback(() => {
         // Функция для сброса счетчика, максимального и начального значений в их исходные значения
-        setCount(0);
-        setMaxValue(5);
-        setStartValue(0);
+        dispatch(ResetAllAC())
         // Скрыть раздел настроек после сброса
         setShowSettings(false);
-    };
+    }, [dispatch, setShowSettings]);
 
     const errorValue = startValue >= maxValue || startValue < 0; // Проверка наличия ошибки во входных значениях
     const countMaxValue = count === maxValue; // Проверка, достигло ли значение счетчика максимального значения
 
-    const inputError = errorValue ? 'error' : undefined; // Имя класса для обозначения ошибки в полях ввода
+    const noStartValue = !startValue && startValue !== 0;  // if not value
+    const noMaxValue = isNaN(Number(maxValue)) || Number(maxValue) === 0;
+
+    const inputError = errorValue || inputEmpty ? 'error' : undefined; // Имя класса для обозначения ошибки в полях ввода
 
     return (
         <div className={'counter-box'}>
@@ -91,13 +128,21 @@ const Counter = () => {
             <div className={'counter-screen '}>
 
                 {/* Вывод текущего значения счетчика или сообщения об ошибке */}
+
                 {
                     errorValue ?
-                        <h2 className={'errors-value'}><em>Invalid value, start value must not exceed the maximum, start
-                            or maximum cannot be less than 0 </em></h2> :
-                        countMaxValue ? <h2 className={countMaxValue ? 'red' : undefined}>You have reached the maximum value</h2> :
-                            <h2>{count}</h2>
+                        <h2 className={'errors-value'}>
+                            <em>Invalid value, start value must not exceed the maximum, start or maximum cannot be less
+                                than 0</em>
+                        </h2>
+                        : noStartValue && noMaxValue ?
+                            <h2 className={noStartValue && noMaxValue ? 'red' : undefined}>Values are required</h2>
+                            : noStartValue ? <h2 className={noStartValue ? 'red' : undefined}>Start value is required</h2>
+                                : noMaxValue ? <h2 className={noMaxValue ? 'red' : undefined}>Max value is required</h2> // Добавлено условие для вывода "Max value is required"
+                                    : countMaxValue ? <h2 className={'red'}>Max value reached</h2>  // Добавлено условие для вывода "Max value reached"
+                                        : <h2>{count}</h2>
                 }
+
 
                 <hr/>
                 {/* Кнопки увеличения и сброса значения счетчика */}
@@ -114,7 +159,8 @@ const Counter = () => {
 
             </div>
 
-            {/* Раздел настроек и управления */}
+            {/* Раздел настроек и управления */
+            }
             <div className={'controls'}>
                 {/* Кнопка для отображения/скрытия раздела настроек */}
                 <span
@@ -133,11 +179,13 @@ const Counter = () => {
                     className={'resets'}
                     onClick={handleResetOll}
                 >
-                    <img src={reset} alt="Reset"/>
+                    {/*<img src={reset} alt="Reset"/>*/}
+                    <span className="material-symbols-outlined">restart_alt</span>
                 </span>
             </div>
 
-            {/* Раздел с настройками */}
+            {/* Раздел с настройками */
+            }
             {
                 showSettings && (
                     <div className={'counter-settings'}>
@@ -172,7 +220,7 @@ const Counter = () => {
                                 className={''}
                                 onKeyDown={() => {
                                 }}
-                                disabled={startValue >= maxValue || startValue < 0}
+                                disabled={(noMaxValue || noStartValue) || (startValue >= maxValue || startValue < 0)}
                             >
                                 Set
                             </Button>
