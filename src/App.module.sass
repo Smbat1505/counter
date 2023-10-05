@@ -1,0 +1,224 @@
+$primary-bg-color: #282c34
+$secondary-bg-color: #5991b2
+$error-text-color: rgba(229, 10, 10, 0.85)
+$accent-color: #61dafb
+$success-color: #00ff15
+$dark-bg-color: rgba(0, 0, 0, 0)
+$light-bg-color: #fff
+
+@mixin flex-center
+  display: flex
+  align-items: center
+  justify-content: center
+
+@mixin rotate-on-hover
+  cursor: pointer
+  transition: transform 0.5s ease-in-out
+
+  &:hover
+    transform: rotate(-60deg)
+
+=button-circle
+  width: 30px
+  height: 30px
+  border-radius: 50px
+
+  img
+    width: 30px
+
+  &:hover
+    @include rotate-on-hover
+
+
+  &:active
+    .material-symbols-outlined
+      color: $success-color
+
+
+@mixin button
+  width: 80px
+  padding: 5px
+  box-sizing: border-box
+  margin-right: 10px
+  font-size: 0.9rem
+  font-weight: 500
+  border-radius: 0.3em
+  border: none
+  cursor: pointer
+
+
+.App
+  @include flex-center
+  flex-direction: row-reverse
+  box-sizing: border-box
+  background: $primary-bg-color
+  padding: 20px
+  width: 100vw
+  height: 100vh
+
+.counter
+  &_box
+    box-sizing: border-box
+
+    @include flex-center
+    flex-direction: column
+
+    min-width: 350px
+    width: 600px
+    max-width: 800px
+    height: auto
+
+    border: 1px #fff solid
+    border-radius: 17px
+    padding: 10px
+    margin: 100px auto
+
+  &_screen
+    width: 100%
+    border: 1px solid #fff
+    border-radius: 7px
+    @include flex-center
+    flex-direction: column
+    height: 50%
+    padding: 20px
+    margin-bottom: 20px
+    box-sizing: border-box
+    gap: 10px
+    background: $secondary-bg-color
+
+  &_errorsVal
+    font-size: 30px
+    color: $error-text-color
+
+  &_error
+    background: red
+    color: #ffffff
+
+  &_buttonSection
+    @include flex-center
+    width: 100%
+
+    & button
+      @include button
+
+
+  &_settings
+    width: 60%
+    @include flex-center
+    flex-direction: column
+    margin: 0 auto
+
+
+  &_input
+    width: 100%
+    padding: 5px 10px
+    //padding-left: 10px
+
+    @include flex-center
+    flex-direction: column
+    gap: 10px
+
+    border: none
+    border-radius: 0.3em
+    margin-bottom: 20px
+
+    & input
+      margin-left: 5px
+      padding: 3px 10px
+      font-weight: 600
+      font-size: 16px
+
+  &_controlsBlock
+    @include flex-center
+    justify-content: space-between
+    width: 100%
+
+  &_button
+  //width: 80px
+  //padding: 5px
+  //box-sizing: border-box
+  //margin: 10px
+  //font-size: 0.9rem
+  //font-weight: 500
+  //border-radius: 0.3em
+  //border: none
+  & button
+    @include button
+
+
+  &_controls
+    @include flex-center
+    gap: 10px
+
+    &_settings
+      width: 30px
+      height: 30px
+      @include flex-center
+      cursor: pointer
+      border-radius: 50%
+      box-shadow: inset 0 0 7px 0px #7a8388
+
+
+      &:hover
+        @include rotate-on-hover
+        box-shadow: inset 0 0 7px 0px #fafbfc
+
+      &:active
+        box-shadow: inset 0 0 1px 20px #850308
+
+
+    &_resets
+      @include button-circle
+
+      &:hover
+        box-shadow: 0 0 4px 0 #fff
+
+      &:active
+        box-shadow: 0 0 6px 0 #039dfc
+
+
+  &_theme
+    width: 30px
+    height: 30px
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 50px
+
+    &.light
+      background-color: $light-bg-color
+      color: #000
+
+    &.dark
+      //background-color: $dark-bg-color
+      //color: #fff
+      box-shadow: 0 0 2px 2px #ffffff
+
+    .materialSymbolsOutline
+      @include flex-center
+      cursor: pointer
+      color: $success-color
+      width: 30px
+      height: 30px
+
+      &:hover
+        color: $accent-color
+
+h2
+  width: 100%
+  height: auto
+  text-align: center
+  padding: 5px
+  margin: 10px
+  color: white
+
+
+label
+  width: 100%
+  padding: 5px
+  flex-wrap: nowrap
+  display: flex
+  color: #61dafb
+
+hr
+  width: 100%

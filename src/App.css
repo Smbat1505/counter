@@ -95,24 +95,21 @@ input {
     color: #61dafb;
 }
 
-.theme .material-symbols-outlined {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+/*.theme .material-symbols-outlined {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: center;*/
 
-    cursor: pointer;
+/*    cursor: pointer;*/
 
-    color: #00ff15;
-    width: 50px;
-    height: 50px;
-}
+/*    color: #00ff15;*/
+/*    width: 50px;*/
+/*    height: 50px;*/
+/*}*/
 
-.theme .material-symbols-outlined:hover {
-    color: #61dafb;
-}
+/*.theme .material-symbols-outlined:hover {*/
+/*    color: #61dafb;*/
+/*}*/
 
 @keyframes App-logo-spin {
     from {

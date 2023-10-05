@@ -1,14 +1,10 @@
 import React from 'react';
-import './App.css';
-import Counter from "./components/Counter";
+import styles from './App.module.css'
 import CounterWithRedux from "./components/CounterWithRedux";
 
 function App() {
     return (
-        <div className={"App"}>
-            <div className="theme">
-                <span className="material-symbols-outlined">dark_mode</span>
-            </div>
+        <div className={styles.App}>
             <CounterWithRedux/>
         </div>
 

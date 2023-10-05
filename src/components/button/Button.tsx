@@ -6,6 +6,7 @@ type UniversalButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 export const Button: React.FC<UniversalButtonProps> = memo(({children, ...props}) => {
+    console.log('rendered button')
     return (
         <button {...props}>
             {children}

@@ -93,9 +93,9 @@ const Counter = () => {
                 {/* Вывод текущего значения счетчика или сообщения об ошибке */}
                 {
                     errorValue ?
-                        <h2 className={'errors-value'}><em>Invalid value, start value must not exceed the maximum, start
+                        <h2 className={'counter_errors-value'}><em>Invalid value, start value must not exceed the maximum, start
                             or maximum cannot be less than 0 </em></h2> :
-                        countMaxValue ? <h2 className={countMaxValue ? 'red' : undefined}>You have reached the maximum value</h2> :
+                        countMaxValue ? <h2 className={countMaxValue ? 'counter_error' : undefined}>You have reached the maximum value</h2> :
                             <h2>{count}</h2>
                 }
 
@@ -115,10 +115,10 @@ const Counter = () => {
             </div>
 
             {/* Раздел настроек и управления */}
-            <div className={'controls'}>
+            <div className={'counter_controls'}>
                 {/* Кнопка для отображения/скрытия раздела настроек */}
                 <span
-                    className={'settings'}
+                    className={'counter_controls_settings'}
                     onClick={handleHiddenSettings}
                 >
                 <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30">
@@ -130,7 +130,7 @@ const Counter = () => {
 
                 {/* Кнопка для полного сброса счетчика и настроек */}
                 <span
-                    className={'resets'}
+                    className={'counter_controls_resets'}
                     onClick={handleResetOll}
                 >
                     <img src={reset} alt="Reset"/>
@@ -140,9 +140,9 @@ const Counter = () => {
             {/* Раздел с настройками */}
             {
                 showSettings && (
-                    <div className={'counter-settings'}>
+                    <div className={'counter_settings'}>
                         <h2>Settings:</h2>
-                        <div className={'counter-input'}>
+                        <div className={'counter_input'}>
                             {/* Поле ввода максимального значения */}
                             <UniversalInput
                                 label=" Max Value"
@@ -165,7 +165,7 @@ const Counter = () => {
 
                             />
                         </div>
-                        <div className={'counter-input'}>
+                        <div className={'counter_input'}>
 
                             <Button
                                 onClick={handleSet}
