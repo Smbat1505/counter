@@ -4,7 +4,7 @@ $error-text-color: rgba(229, 10, 10, 0.85)
 $accent-color: #61dafb
 $success-color: #00ff15
 $dark-bg-color: rgba(0, 0, 0, 0)
-$light-bg-color: #fff
+$light-bg-color: rgb(255, 255, 255)
 
 @mixin flex-center
   display: flex
@@ -72,6 +72,15 @@ $light-bg-color: #fff
     border-radius: 17px
     padding: 10px
     margin: 100px auto
+    &.light
+      background-color: $light-bg-color
+      color: #000
+
+    &.dark
+      //background-color: $dark-bg-color
+      color: #fff
+      box-shadow: 0 0 2px 2px #ffffff
+
 
   &_screen
     width: 100%
@@ -90,9 +99,11 @@ $light-bg-color: #fff
     font-size: 30px
     color: $error-text-color
 
+
   &_error
     background: red
     color: #ffffff
+    cursor: no-drop
 
   &_buttonSection
     @include flex-center
@@ -183,16 +194,9 @@ $light-bg-color: #fff
     display: flex
     align-items: center
     justify-content: center
-    border-radius: 50px
 
-    &.light
-      background-color: $light-bg-color
-      color: #000
 
-    &.dark
-      //background-color: $dark-bg-color
-      //color: #fff
-      box-shadow: 0 0 2px 2px #ffffff
+
 
     .materialSymbolsOutline
       @include flex-center
@@ -200,10 +204,11 @@ $light-bg-color: #fff
       color: $success-color
       width: 30px
       height: 30px
+      border-radius: 50px
 
       &:hover
-        color: $accent-color
-
+        //color: $accent-color
+        box-shadow: 0 0 2px 1px #ffffff
 h2
   width: 100%
   height: auto

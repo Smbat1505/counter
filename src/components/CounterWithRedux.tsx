@@ -132,7 +132,7 @@ const Counter = () => {
     };
 
     return (
-        <div className={styles.counter_box}>
+        <div className={`${styles.counter_box} ${darkMode ? styles.dark : styles.light}`}>
             {/* Раздел экрана счетчика */}
             <div className={styles.counter_screen}>
 
@@ -192,7 +192,7 @@ const Counter = () => {
                     </div>
                 </div>
                 <div onClick={toggleDarkMode}
-                     className={`${styles.counter_theme} ${darkMode ? styles.dark : styles.light}`}>
+                     className={`${styles.counter_theme} `}>
                     <img src={theme} alt="default values" className={styles.materialSymbolsOutline}/>
                     {/*<h1>{darkMode ? 'Dark Theme' : 'Light Theme'}</h1>*/}
                 </div>

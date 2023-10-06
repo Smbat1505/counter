@@ -25,6 +25,14 @@
   padding: 10px;
   margin: 100px auto;
 }
+.counter_box.light {
+  background-color: rgb(255, 255, 255);
+  color: #000;
+}
+.counter_box.dark {
+  color: #fff;
+  box-shadow: 0 0 2px 2px #ffffff;
+}
 .counter_screen {
   width: 100%;
   border: 1px solid #fff;
@@ -47,6 +55,7 @@
 .counter_error {
   background: red;
   color: #ffffff;
+  cursor: no-drop;
 }
 .counter_buttonSection {
   display: flex;
@@ -166,14 +175,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 50px;
-}
-.counter_theme.light {
-  background-color: #fff;
-  color: #000;
-}
-.counter_theme.dark {
-  box-shadow: 0 0 2px 2px #ffffff;
 }
 .counter_theme .materialSymbolsOutline {
   display: flex;
@@ -183,9 +184,10 @@
   color: #00ff15;
   width: 30px;
   height: 30px;
+  border-radius: 50px;
 }
 .counter_theme .materialSymbolsOutline:hover {
-  color: #61dafb;
+  box-shadow: 0 0 2px 1px #ffffff;
 }
 
 h2 {
